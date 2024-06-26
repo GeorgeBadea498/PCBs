@@ -1,0 +1,685 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD22\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">6/26/2024</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11:18:15 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc" class="file"><acronym title="D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc">D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">115</td></tr>
+</table>
+</td>
+</table><a name="IDQ0OD4SNVE0R0FHCX5PLE2U3WCKVCII44F1AVTSLCKV3K3525A0AN"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOGEAOZQE0A3HOAPETDYSKVMUBMXGUYSRNT2SBTETLOYMXH0P5J4K">Clearance Constraint (Gap=0.5mm) (All),(All)</a></td>
+<td class="column2">102</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYNA0FFWRNEO3IKMGGTTRT1U0IJKOV4DI2OS5HZMCMW3QHHGOOGKC">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYIOGFZDYRJQXJS4O0AGYJOPMCH5A04LQBEANTLEF1V2KOVZXDQ0N">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDV33TO5OBCRP3M5LLDR0O4O4E5ELYOC414GNFMVTV0YYUCMDD5PF">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIZMSGDIN4FJYHSVMNYSA4GBESMFB25DSV4YRDGP513UT1KHTZGPM">Width Constraint (Min=0.7mm) (Max=0.77mm) (Preferred=0.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3R3AKP3CAE2WBZK5SPMH4YNTDPV5J4VPFKVW4RK2IK1FAWYJBQOP">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDOZ402ZSTHK2CE1X0ZZEGYVLIHKW42RJAZCFR0OD4PCVK0VWORA0J">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDE0J4UVBBVZC2GWMM2TMOPP2DQLTY4UM5T55LKWHWZZA2KZ1CUTDG">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDVPBCOYB5PVF4FJDB00JE0R0ZBF534PKJSZEBXDKTTCJMZRYRGZTC">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDLWBBCN2XTT3V3MLOCRCINDMZH4BNIDYI3TLQGGKC4OCQLTWQOLO">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4DDDM4OQLQ5GMLI2KZLZV2TOGHP43BFJGYB1HYOSNHIFJPCM0NWO">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">5</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID54NRA12AJAANDUYVMD5RLZTA1JNUVOFU40DYGZPB3QAHFVKPE2QI">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJDBBTAOQ2LZPCSYRCPOJ3WJUC2EB0SSRJY32DOWJE5YAR1XBDBI">Room Sheet1 (Bounding Region = (26.162mm, 26.162mm, 124.841mm, 124.333mm) (InComponentClass('Sheet1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXOL1PLL2EWEXMK2BES0PIHACTKER2T35OPIC3BJUKUM043PAXJHD">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">115</td>
+</tr>
+</table><br><a name="IDOGEAOZQE0A3HOAPETDYSKVMUBMXGUYSRNT2SBTETLOYMXH0P5J4K"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=0.5mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2973.411mil|Location2.X=3009.794mil|Location1.Y=3937.938mil|Location2.Y=3952.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2973.411mil|Location2.X=3009.794mil|Location1.Y=3937.938mil|Location2.Y=3952.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad BT1-1(51.054mm,74.803mm) on Multi-Layer And Track (38.862mm,74.803mm)(51.054mm,74.803mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3102.938mil|Location2.X=3139.322mil|Location1.Y=3937.938mil|Location2.Y=3952.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3102.938mil|Location2.X=3139.322mil|Location1.Y=3937.938mil|Location2.Y=3952.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad BT1-2(53.594mm,74.803mm) on Multi-Layer And Track (53.594mm,62.103mm)(53.594mm,74.803mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.053mil|Location2.X=3847.258mil|Location1.Y=3483.012mil|Location2.Y=3509.391mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.053mil|Location2.X=3847.258mil|Location1.Y=3483.012mil|Location2.Y=3509.391mil|Absolute=True">Clearance Constraint: (0.128mm &lt; 0.5mm) Between Pad C1-1(72.39mm,62.865mm) on Multi-Layer And Track (57.404mm,63.627mm)(71.628mm,63.627mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=3467.938mil|Location2.Y=3482.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=3467.938mil|Location2.Y=3482.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad C1-1(72.39mm,62.865mm) on Multi-Layer And Track (71.628mm,63.627mm)(72.39mm,62.865mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=3167.938mil|Location2.Y=3182.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=3167.938mil|Location2.Y=3182.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad C1-2(72.39mm,55.245mm) on Multi-Layer And Track (66.04mm,61.595mm)(72.39mm,55.245mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=3167.938mil|Location2.Y=3182.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=3167.938mil|Location2.Y=3182.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad C1-2(72.39mm,55.245mm) on Multi-Layer And Track (72.39mm,40.259mm)(72.39mm,55.245mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2702.938mil|Location2.X=2739.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2702.938mil|Location2.X=2739.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad D1-1(43.434mm,37.084mm) on Multi-Layer And Track (43.434mm,37.084mm)(48.133mm,41.783mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.938mil|Location2.X=2639.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.938mil|Location2.X=2639.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad D1-2(40.894mm,37.084mm) on Multi-Layer And Track (36.449mm,32.639mm)(40.894mm,37.084mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.938mil|Location2.X=2639.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.938mil|Location2.X=2639.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad D1-2(40.894mm,37.084mm) on Multi-Layer And Track (40.894mm,37.084mm)(41.584mm,37.774mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.938mil|Location2.X=2639.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.938mil|Location2.X=2639.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad D1-2(40.894mm,37.084mm) on Multi-Layer And Track (41.584mm,37.774mm)(41.584mm,40.39mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad P1-1(57.531mm,56.007mm) on Multi-Layer And Track (57.531mm,56.007mm)(60.452mm,56.007mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=3097.938mil|Location2.Y=3112.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=3097.938mil|Location2.Y=3112.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad P1-2(57.531mm,53.467mm) on Multi-Layer And Track (57.531mm,50.038mm)(57.531mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3157.938mil|Location2.X=3194.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3157.938mil|Location2.X=3194.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad P1-3(54.991mm,56.007mm) on Multi-Layer And Track (54.991mm,56.007mm)(54.991mm,58.772mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3057.938mil|Location2.X=3094.322mil|Location1.Y=3097.938mil|Location2.Y=3112.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3057.938mil|Location2.X=3094.322mil|Location1.Y=3097.938mil|Location2.Y=3112.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad P1-6(52.451mm,53.467mm) on Multi-Layer And Track (52.451mm,49.889mm)(52.451mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad P1-7(49.911mm,56.007mm) on Multi-Layer And Track (48.514mm,57.404mm)(49.911mm,56.007mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad P1-7(49.911mm,56.007mm) on Multi-Layer And Track (49.911mm,56.007mm)(49.911mm,63.5mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2916.658mil|Location2.X=2937.593mil|Location1.Y=3083.115mil|Location2.Y=3115.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2916.658mil|Location2.X=2937.593mil|Location1.Y=3083.115mil|Location2.Y=3115.468mil|Absolute=True">Clearance Constraint: (0.424mm &lt; 0.5mm) Between Pad P1-8(49.911mm,53.467mm) on Multi-Layer And Track (44.704mm,49.784mm)(48.387mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3097.938mil|Location2.Y=3112.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3097.938mil|Location2.Y=3112.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad P1-8(49.911mm,53.467mm) on Multi-Layer And Track (48.387mm,53.467mm)(49.911mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=2952.938mil|Location2.Y=2967.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=2952.938mil|Location2.Y=2967.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R1-1(44.704mm,49.784mm) on Multi-Layer And Track (38.989mm,49.911mm)(44.577mm,49.911mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=2952.938mil|Location2.Y=2967.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=2952.938mil|Location2.Y=2967.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R1-1(44.704mm,49.784mm) on Multi-Layer And Track (44.577mm,49.911mm)(44.704mm,49.784mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=2952.938mil|Location2.Y=2967.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=2952.938mil|Location2.Y=2967.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R1-1(44.704mm,49.784mm) on Multi-Layer And Track (44.704mm,49.784mm)(48.387mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=3252.938mil|Location2.Y=3267.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=3252.938mil|Location2.Y=3267.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R1-2(44.704mm,57.404mm) on Multi-Layer And Track (44.704mm,57.404mm)(48.514mm,57.404mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2952.938mil|Location2.X=2989.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2952.938mil|Location2.X=2989.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R2-1(49.784mm,63.627mm) on Multi-Layer And Track (49.784mm,63.627mm)(49.911mm,63.5mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2952.938mil|Location2.X=2989.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2952.938mil|Location2.X=2989.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R2-1(49.784mm,63.627mm) on Multi-Layer And Track (49.911mm,56.007mm)(49.911mm,63.5mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3252.938mil|Location2.X=3289.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3252.938mil|Location2.X=3289.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R2-2(57.404mm,63.627mm) on Multi-Layer And Track (57.404mm,63.627mm)(57.404mm,79.248mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3252.938mil|Location2.X=3289.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3252.938mil|Location2.X=3289.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R2-2(57.404mm,63.627mm) on Multi-Layer And Track (57.404mm,63.627mm)(71.628mm,63.627mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.938mil|Location2.X=3724.322mil|Location1.Y=2637.938mil|Location2.Y=2652.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.938mil|Location2.X=3724.322mil|Location1.Y=2637.938mil|Location2.Y=2652.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R3-1(68.453mm,41.783mm) on Multi-Layer And Track (48.133mm,41.783mm)(68.453mm,41.783mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.938mil|Location2.X=3724.322mil|Location1.Y=2937.938mil|Location2.Y=2952.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.938mil|Location2.X=3724.322mil|Location1.Y=2937.938mil|Location2.Y=2952.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Pad R3-2(68.453mm,49.403mm) on Multi-Layer And Track (68.453mm,49.403mm)(68.453mm,52.324mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2097.938mil|Location2.X=2134.322mil|Location1.Y=3042.938mil|Location2.Y=3057.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2097.938mil|Location2.X=2134.322mil|Location1.Y=3042.938mil|Location2.Y=3057.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (28.067mm,52.07mm)(28.067mm,79.629mm) on Top Layer And Track (28.067mm,52.07mm)(33.909mm,46.228mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2097.938mil|Location2.X=2134.322mil|Location1.Y=4127.938mil|Location2.Y=4142.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2097.938mil|Location2.X=2134.322mil|Location1.Y=4127.938mil|Location2.Y=4142.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (28.067mm,52.07mm)(28.067mm,79.629mm) on Top Layer And Track (28.067mm,79.629mm)(42.926mm,79.629mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2327.938mil|Location2.X=2364.322mil|Location1.Y=2812.938mil|Location2.Y=2827.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2327.938mil|Location2.X=2364.322mil|Location1.Y=2812.938mil|Location2.Y=2827.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (28.067mm,52.07mm)(33.909mm,46.228mm) on Top Layer And Track (33.909mm,46.228mm)(54.331mm,46.228mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2682.938mil|Location2.X=2719.322mil|Location1.Y=4127.938mil|Location2.Y=4142.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2682.938mil|Location2.X=2719.322mil|Location1.Y=4127.938mil|Location2.Y=4142.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (28.067mm,79.629mm)(42.926mm,79.629mm) on Top Layer And Track (42.926mm,79.629mm)(43.815mm,80.518mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3131.938mil|Location2.X=3168.322mil|Location1.Y=2812.938mil|Location2.Y=2827.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3131.938mil|Location2.X=3168.322mil|Location1.Y=2812.938mil|Location2.Y=2827.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (33.909mm,46.228mm)(54.331mm,46.228mm) on Top Layer And Track (54.331mm,46.228mm)(57.556mm,49.454mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2427.938mil|Location2.X=2464.322mil|Location1.Y=2094.082mil|Location2.Y=2108.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2427.938mil|Location2.X=2464.322mil|Location1.Y=2094.082mil|Location2.Y=2108.205mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (36.449mm,27.969mm)(36.449mm,32.639mm) on Top Layer And Track (36.449mm,27.969mm)(36.859mm,27.559mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2427.938mil|Location2.X=2464.322mil|Location1.Y=2277.938mil|Location2.Y=2292.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2427.938mil|Location2.X=2464.322mil|Location1.Y=2277.938mil|Location2.Y=2292.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (36.449mm,27.969mm)(36.449mm,32.639mm) on Top Layer And Track (36.449mm,32.639mm)(40.894mm,37.084mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2444.082mil|Location2.X=2480.465mil|Location1.Y=2077.938mil|Location2.Y=2092.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2444.082mil|Location2.X=2480.465mil|Location1.Y=2077.938mil|Location2.Y=2092.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (36.449mm,27.969mm)(36.449mm,32.639mm) on Top Layer And Track (36.859mm,27.559mm)(59.69mm,27.559mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2444.082mil|Location2.X=2480.465mil|Location1.Y=2077.938mil|Location2.Y=2092.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2444.082mil|Location2.X=2480.465mil|Location1.Y=2077.938mil|Location2.Y=2092.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (36.449mm,27.969mm)(36.859mm,27.559mm) on Top Layer And Track (36.859mm,27.559mm)(59.69mm,27.559mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.938mil|Location2.X=2639.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2602.938mil|Location2.X=2639.322mil|Location1.Y=2452.938mil|Location2.Y=2467.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (36.449mm,32.639mm)(40.894mm,37.084mm) on Top Layer And Track (40.894mm,37.084mm)(41.584mm,37.774mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2613.115mil|Location2.X=2639.494mil|Location1.Y=2457.845mil|Location2.Y=2484.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2613.115mil|Location2.X=2639.494mil|Location1.Y=2457.845mil|Location2.Y=2484.05mil|Absolute=True">Clearance Constraint: (0.276mm &lt; 0.5mm) Between Track (36.449mm,32.639mm)(40.894mm,37.084mm) on Top Layer And Track (41.584mm,37.774mm)(41.584mm,40.39mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3342.938mil|Location2.X=3379.322mil|Location1.Y=2077.938mil|Location2.Y=2092.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3342.938mil|Location2.X=3379.322mil|Location1.Y=2077.938mil|Location2.Y=2092.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (36.859mm,27.559mm)(59.69mm,27.559mm) on Top Layer And Track (59.69mm,27.559mm)(72.39mm,40.259mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2522.938mil|Location2.X=2559.322mil|Location1.Y=2962.938mil|Location2.Y=2977.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2522.938mil|Location2.X=2559.322mil|Location1.Y=2962.938mil|Location2.Y=2977.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (38.862mm,50.038mm)(38.862mm,74.803mm) on Top Layer And Track (38.862mm,50.038mm)(38.989mm,49.911mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2522.938mil|Location2.X=2559.322mil|Location1.Y=3937.938mil|Location2.Y=3952.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2522.938mil|Location2.X=2559.322mil|Location1.Y=3937.938mil|Location2.Y=3952.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (38.862mm,50.038mm)(38.862mm,74.803mm) on Top Layer And Track (38.862mm,74.803mm)(51.054mm,74.803mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2527.938mil|Location2.X=2564.322mil|Location1.Y=2957.938mil|Location2.Y=2972.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2527.938mil|Location2.X=2564.322mil|Location1.Y=2957.938mil|Location2.Y=2972.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (38.862mm,50.038mm)(38.862mm,74.803mm) on Top Layer And Track (38.989mm,49.911mm)(44.577mm,49.911mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2527.938mil|Location2.X=2564.322mil|Location1.Y=2957.938mil|Location2.Y=2972.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2527.938mil|Location2.X=2564.322mil|Location1.Y=2957.938mil|Location2.Y=2972.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (38.862mm,50.038mm)(38.989mm,49.911mm) on Top Layer And Track (38.989mm,49.911mm)(44.577mm,49.911mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2747.938mil|Location2.X=2784.322mil|Location1.Y=2957.938mil|Location2.Y=2972.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2747.938mil|Location2.X=2784.322mil|Location1.Y=2957.938mil|Location2.Y=2972.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (38.989mm,49.911mm)(44.577mm,49.911mm) on Top Layer And Track (44.577mm,49.911mm)(44.704mm,49.784mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2747.938mil|Location2.X=2784.322mil|Location1.Y=2957.938mil|Location2.Y=2972.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2747.938mil|Location2.X=2784.322mil|Location1.Y=2957.938mil|Location2.Y=2972.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (38.989mm,49.911mm)(44.577mm,49.911mm) on Top Layer And Track (44.704mm,49.784mm)(48.387mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2630.104mil|Location2.X=2666.487mil|Location1.Y=2480.104mil|Location2.Y=2494.227mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2630.104mil|Location2.X=2666.487mil|Location1.Y=2480.104mil|Location2.Y=2494.227mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (40.894mm,37.084mm)(41.584mm,37.774mm) on Top Layer And Track (41.584mm,37.774mm)(41.584mm,40.39mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2630.104mil|Location2.X=2666.487mil|Location1.Y=2583.108mil|Location2.Y=2597.231mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2630.104mil|Location2.X=2666.487mil|Location1.Y=2583.108mil|Location2.Y=2597.231mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (41.584mm,37.774mm)(41.584mm,40.39mm) on Top Layer And Track (41.584mm,40.39mm)(45.39mm,44.196mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2779.934mil|Location2.X=2816.318mil|Location1.Y=2732.938mil|Location2.Y=2747.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2779.934mil|Location2.X=2816.318mil|Location1.Y=2732.938mil|Location2.Y=2747.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (41.584mm,40.39mm)(45.39mm,44.196mm) on Top Layer And Track (45.39mm,44.196mm)(62.455mm,44.196mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2717.938mil|Location2.X=2754.322mil|Location1.Y=4162.938mil|Location2.Y=4177.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2717.938mil|Location2.X=2754.322mil|Location1.Y=4162.938mil|Location2.Y=4177.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (42.926mm,79.629mm)(43.815mm,80.518mm) on Top Layer And Track (43.815mm,80.518mm)(44.069mm,80.264mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2717.938mil|Location2.X=2754.322mil|Location1.Y=4162.938mil|Location2.Y=4177.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2717.938mil|Location2.X=2754.322mil|Location1.Y=4162.938mil|Location2.Y=4177.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (42.926mm,79.629mm)(43.815mm,80.518mm) on Top Layer And Track (44.069mm,80.264mm)(56.388mm,80.264mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2887.938mil|Location2.X=2924.322mil|Location1.Y=2637.938mil|Location2.Y=2652.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2887.938mil|Location2.X=2924.322mil|Location1.Y=2637.938mil|Location2.Y=2652.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (43.434mm,37.084mm)(48.133mm,41.783mm) on Top Layer And Track (48.133mm,41.783mm)(68.453mm,41.783mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2727.938mil|Location2.X=2764.322mil|Location1.Y=4152.938mil|Location2.Y=4167.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2727.938mil|Location2.X=2764.322mil|Location1.Y=4152.938mil|Location2.Y=4167.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (43.815mm,80.518mm)(44.069mm,80.264mm) on Top Layer And Track (44.069mm,80.264mm)(56.388mm,80.264mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3212.938mil|Location2.X=3249.322mil|Location1.Y=4152.938mil|Location2.Y=4167.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3212.938mil|Location2.X=3249.322mil|Location1.Y=4152.938mil|Location2.Y=4167.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (44.069mm,80.264mm)(56.388mm,80.264mm) on Top Layer And Track (56.388mm,80.264mm)(57.404mm,79.248mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=2952.938mil|Location2.Y=2967.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2752.938mil|Location2.X=2789.322mil|Location1.Y=2952.938mil|Location2.Y=2967.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (44.577mm,49.911mm)(44.704mm,49.784mm) on Top Layer And Track (44.704mm,49.784mm)(48.387mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2897.938mil|Location2.X=2934.322mil|Location1.Y=3097.938mil|Location2.Y=3112.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2897.938mil|Location2.X=2934.322mil|Location1.Y=3097.938mil|Location2.Y=3112.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (44.704mm,49.784mm)(48.387mm,53.467mm) on Top Layer And Track (48.387mm,53.467mm)(49.911mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2902.938mil|Location2.X=2939.322mil|Location1.Y=3252.938mil|Location2.Y=3267.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2902.938mil|Location2.X=2939.322mil|Location1.Y=3252.938mil|Location2.Y=3267.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (44.704mm,57.404mm)(48.514mm,57.404mm) on Top Layer And Track (48.514mm,57.404mm)(49.911mm,56.007mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3451.795mil|Location2.X=3488.178mil|Location1.Y=2732.938mil|Location2.Y=2747.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3451.795mil|Location2.X=3488.178mil|Location1.Y=2732.938mil|Location2.Y=2747.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (45.39mm,44.196mm)(62.455mm,44.196mm) on Top Layer And Track (62.455mm,44.196mm)(62.865mm,44.606mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3467.938mil|Location2.X=3504.322mil|Location1.Y=2749.082mil|Location2.Y=2763.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3467.938mil|Location2.X=3504.322mil|Location1.Y=2749.082mil|Location2.Y=2763.205mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (45.39mm,44.196mm)(62.455mm,44.196mm) on Top Layer And Track (62.865mm,44.606mm)(62.865mm,53.594mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (48.514mm,57.404mm)(49.911mm,56.007mm) on Top Layer And Track (49.911mm,56.007mm)(49.911mm,63.5mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3492.938mil|Location2.Y=3507.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2957.938mil|Location2.X=2994.322mil|Location1.Y=3492.938mil|Location2.Y=3507.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (49.784mm,63.627mm)(49.911mm,63.5mm) on Top Layer And Track (49.911mm,56.007mm)(49.911mm,63.5mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3057.938mil|Location2.X=3094.322mil|Location1.Y=2957.082mil|Location2.Y=2971.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3057.938mil|Location2.X=3094.322mil|Location1.Y=2957.082mil|Location2.Y=2971.205mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (52.451mm,49.889mm)(52.451mm,53.467mm) on Top Layer And Track (52.451mm,49.889mm)(52.861mm,49.479mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3057.938mil|Location2.X=3094.322mil|Location1.Y=2957.082mil|Location2.Y=2971.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3057.938mil|Location2.X=3094.322mil|Location1.Y=2957.082mil|Location2.Y=2971.205mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (52.451mm,49.889mm)(52.451mm,53.467mm) on Top Layer And Track (52.861mm,49.479mm)(57.277mm,49.479mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3074.082mil|Location2.X=3110.465mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3074.082mil|Location2.X=3110.465mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (52.451mm,49.889mm)(52.861mm,49.479mm) on Top Layer And Track (52.861mm,49.479mm)(57.277mm,49.479mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3253.938mil|Location2.X=3290.322mil|Location1.Y=2934.938mil|Location2.Y=2949.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3253.938mil|Location2.X=3290.322mil|Location1.Y=2934.938mil|Location2.Y=2949.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (52.861mm,49.479mm)(57.277mm,49.479mm) on Top Layer And Track (54.331mm,46.228mm)(57.556mm,49.454mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.938mil|Location2.X=3284.322mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.938mil|Location2.X=3284.322mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (52.861mm,49.479mm)(57.277mm,49.479mm) on Top Layer And Track (57.277mm,49.479mm)(57.531mm,49.733mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (52.861mm,49.479mm)(57.277mm,49.479mm) on Top Layer And Track (57.531mm,49.733mm)(57.531mm,50.038mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.938mil|Location2.X=3284.322mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.938mil|Location2.X=3284.322mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (52.861mm,49.479mm)(57.277mm,49.479mm) on Top Layer And Track (57.531mm,50.038mm)(57.531mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2961.938mil|Location2.Y=2976.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2961.938mil|Location2.Y=2976.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (52.861mm,49.479mm)(57.277mm,49.479mm) on Top Layer And Track (57.531mm,50.038mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.938mil|Location2.X=3284.322mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.938mil|Location2.X=3284.322mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (52.861mm,49.479mm)(57.277mm,49.479mm) on Top Layer And Track (57.556mm,49.454mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3102.938mil|Location2.X=3139.322mil|Location1.Y=3437.938mil|Location2.Y=3452.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3102.938mil|Location2.X=3139.322mil|Location1.Y=3437.938mil|Location2.Y=3452.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (53.594mm,62.103mm)(53.594mm,74.803mm) on Top Layer And Track (53.594mm,62.103mm)(54.102mm,61.595mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3109.532mil|Location2.X=3135.737mil|Location1.Y=3424.532mil|Location2.Y=3450.911mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3109.532mil|Location2.X=3135.737mil|Location1.Y=3424.532mil|Location2.Y=3450.911mil|Absolute=True">Clearance Constraint: (0.018mm &lt; 0.5mm) Between Track (53.594mm,62.103mm)(53.594mm,74.803mm) on Top Layer And Track (54.102mm,61.595mm)(66.04mm,61.595mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3122.938mil|Location2.X=3159.322mil|Location1.Y=3417.938mil|Location2.Y=3432.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3122.938mil|Location2.X=3159.322mil|Location1.Y=3417.938mil|Location2.Y=3432.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (53.594mm,62.103mm)(54.102mm,61.595mm) on Top Layer And Track (54.102mm,61.595mm)(66.04mm,61.595mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3592.938mil|Location2.X=3629.322mil|Location1.Y=3417.938mil|Location2.Y=3432.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3592.938mil|Location2.X=3629.322mil|Location1.Y=3417.938mil|Location2.Y=3432.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (54.102mm,61.595mm)(66.04mm,61.595mm) on Top Layer And Track (66.04mm,61.595mm)(72.39mm,55.245mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.938mil|Location2.X=3284.322mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3247.938mil|Location2.X=3284.322mil|Location1.Y=2940.938mil|Location2.Y=2955.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (54.331mm,46.228mm)(57.556mm,49.454mm) on Top Layer And Track (57.277mm,49.479mm)(57.531mm,49.733mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2939.938mil|Location2.Y=2954.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2939.938mil|Location2.Y=2954.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (54.331mm,46.228mm)(57.556mm,49.454mm) on Top Layer And Track (57.531mm,49.733mm)(57.531mm,50.038mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2939.938mil|Location2.Y=2954.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2939.938mil|Location2.Y=2954.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (54.331mm,46.228mm)(57.556mm,49.454mm) on Top Layer And Track (57.531mm,50.038mm)(57.531mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2939.938mil|Location2.Y=2954.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2939.938mil|Location2.Y=2954.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (54.331mm,46.228mm)(57.556mm,49.454mm) on Top Layer And Track (57.531mm,50.038mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2939.938mil|Location2.Y=2954.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2939.938mil|Location2.Y=2954.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (54.331mm,46.228mm)(57.556mm,49.454mm) on Top Layer And Track (57.556mm,49.454mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3157.938mil|Location2.X=3194.322mil|Location1.Y=3306.795mil|Location2.Y=3320.918mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3157.938mil|Location2.X=3194.322mil|Location1.Y=3306.795mil|Location2.Y=3320.918mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (54.991mm,56.007mm)(54.991mm,58.772mm) on Top Layer And Track (54.991mm,58.772mm)(55.401mm,59.182mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3157.938mil|Location2.X=3194.322mil|Location1.Y=3306.795mil|Location2.Y=3320.918mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3157.938mil|Location2.X=3194.322mil|Location1.Y=3306.795mil|Location2.Y=3320.918mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (54.991mm,56.007mm)(54.991mm,58.772mm) on Top Layer And Track (55.401mm,59.182mm)(61.595mm,59.182mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3174.082mil|Location2.X=3210.465mil|Location1.Y=3322.938mil|Location2.Y=3337.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3174.082mil|Location2.X=3210.465mil|Location1.Y=3322.938mil|Location2.Y=3337.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (54.991mm,58.772mm)(55.401mm,59.182mm) on Top Layer And Track (55.401mm,59.182mm)(61.595mm,59.182mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3417.938mil|Location2.X=3454.322mil|Location1.Y=3322.938mil|Location2.Y=3337.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3417.938mil|Location2.X=3454.322mil|Location1.Y=3322.938mil|Location2.Y=3337.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (55.401mm,59.182mm)(61.595mm,59.182mm) on Top Layer And Track (61.595mm,59.182mm)(68.453mm,52.324mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3252.938mil|Location2.X=3289.322mil|Location1.Y=4112.938mil|Location2.Y=4127.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3252.938mil|Location2.X=3289.322mil|Location1.Y=4112.938mil|Location2.Y=4127.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (56.388mm,80.264mm)(57.404mm,79.248mm) on Top Layer And Track (57.404mm,63.627mm)(57.404mm,79.248mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.277mm,49.479mm)(57.531mm,49.733mm) on Top Layer And Track (57.531mm,49.733mm)(57.531mm,50.038mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.277mm,49.479mm)(57.531mm,49.733mm) on Top Layer And Track (57.531mm,50.038mm)(57.531mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.277mm,49.479mm)(57.531mm,49.733mm) on Top Layer And Track (57.531mm,50.038mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.277mm,49.479mm)(57.531mm,49.733mm) on Top Layer And Track (57.556mm,49.454mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3252.938mil|Location2.X=3289.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3252.938mil|Location2.X=3289.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.404mm,63.627mm)(57.404mm,79.248mm) on Top Layer And Track (57.404mm,63.627mm)(71.628mm,63.627mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3812.938mil|Location2.X=3849.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3812.938mil|Location2.X=3849.322mil|Location1.Y=3497.938mil|Location2.Y=3512.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.404mm,63.627mm)(71.628mm,63.627mm) on Top Layer And Track (71.628mm,63.627mm)(72.39mm,62.865mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2962.938mil|Location2.Y=2977.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2962.938mil|Location2.Y=2977.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.531mm,49.733mm)(57.531mm,50.038mm) on Top Layer And Track (57.531mm,50.038mm)(57.531mm,53.467mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2962.938mil|Location2.Y=2977.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2962.938mil|Location2.Y=2977.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.531mm,49.733mm)(57.531mm,50.038mm) on Top Layer And Track (57.531mm,50.038mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2950.938mil|Location2.Y=2965.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.531mm,49.733mm)(57.531mm,50.038mm) on Top Layer And Track (57.556mm,49.454mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2962.938mil|Location2.Y=2977.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3257.938mil|Location2.X=3294.322mil|Location1.Y=2962.938mil|Location2.Y=2977.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.531mm,50.038mm)(57.531mm,53.467mm) on Top Layer And Track (57.531mm,50.038mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2961.938mil|Location2.Y=2976.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2961.938mil|Location2.Y=2976.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.531mm,50.038mm)(57.531mm,53.467mm) on Top Layer And Track (57.556mm,49.454mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2961.938mil|Location2.Y=2976.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3258.938mil|Location2.X=3295.322mil|Location1.Y=2961.938mil|Location2.Y=2976.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.531mm,50.038mm)(57.556mm,50.013mm) on Top Layer And Track (57.556mm,49.454mm)(57.556mm,50.013mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3372.938mil|Location2.X=3409.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3372.938mil|Location2.X=3409.322mil|Location1.Y=3197.938mil|Location2.Y=3212.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (57.531mm,56.007mm)(60.452mm,56.007mm) on Top Layer And Track (60.452mm,56.007mm)(62.865mm,53.594mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=2577.938mil|Location2.Y=2592.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=2577.938mil|Location2.Y=2592.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (59.69mm,27.559mm)(72.39mm,40.259mm) on Top Layer And Track (72.39mm,40.259mm)(72.39mm,55.245mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3467.938mil|Location2.X=3504.322mil|Location1.Y=3102.938mil|Location2.Y=3117.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3467.938mil|Location2.X=3504.322mil|Location1.Y=3102.938mil|Location2.Y=3117.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (60.452mm,56.007mm)(62.865mm,53.594mm) on Top Layer And Track (62.865mm,44.606mm)(62.865mm,53.594mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.938mil|Location2.X=3724.322mil|Location1.Y=3052.938mil|Location2.Y=3067.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3687.938mil|Location2.X=3724.322mil|Location1.Y=3052.938mil|Location2.Y=3067.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (61.595mm,59.182mm)(68.453mm,52.324mm) on Top Layer And Track (68.453mm,49.403mm)(68.453mm,52.324mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3467.938mil|Location2.X=3504.322mil|Location1.Y=2749.082mil|Location2.Y=2763.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3467.938mil|Location2.X=3504.322mil|Location1.Y=2749.082mil|Location2.Y=2763.205mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (62.455mm,44.196mm)(62.865mm,44.606mm) on Top Layer And Track (62.865mm,44.606mm)(62.865mm,53.594mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=3167.938mil|Location2.Y=3182.062mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3842.938mil|Location2.X=3879.322mil|Location1.Y=3167.938mil|Location2.Y=3182.062mil|Absolute=True">Clearance Constraint: (Collision &lt; 0.5mm) Between Track (66.04mm,61.595mm)(72.39mm,55.245mm) on Top Layer And Track (72.39mm,40.259mm)(72.39mm,55.245mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDLWBBCN2XTT3V3MLOCRCINDMZH4BNIDYI3TLQGGKC4OCQLTWQOLO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2737.187mil|Location2.X=2748.437mil|Location1.Y=2454.375mil|Location2.Y=2465.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2737.187mil|Location2.X=2748.437mil|Location1.Y=2454.375mil|Location2.Y=2465.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.066mm &lt; 0.254mm) Between Pad D1-1(43.434mm,37.084mm) on Multi-Layer And Track (44.364mm,32.684mm)(44.364mm,39.084mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.066mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2571.563mil|Location2.X=2582.813mil|Location1.Y=2454.375mil|Location2.Y=2465.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2571.563mil|Location2.X=2582.813mil|Location1.Y=2454.375mil|Location2.Y=2465.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.066mm &lt; 0.254mm) Between Pad D1-2(40.894mm,37.084mm) on Multi-Layer And Track (39.964mm,32.684mm)(39.964mm,39.084mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.066mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2754.375mil|Location2.X=2765.625mil|Location1.Y=2986.692mil|Location2.Y=2997.942mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2754.375mil|Location2.X=2765.625mil|Location1.Y=2986.692mil|Location2.Y=2997.942mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.241mm &lt; 0.254mm) Between Pad R1-1(44.704mm,49.784mm) on Multi-Layer And Track (44.704mm,50.825mm)(44.704mm,51.054mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2754.375mil|Location2.X=2765.625mil|Location1.Y=3222.058mil|Location2.Y=3233.308mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2754.375mil|Location2.X=2765.625mil|Location1.Y=3222.058mil|Location2.Y=3233.308mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.241mm &lt; 0.254mm) Between Pad R1-2(44.704mm,57.404mm) on Multi-Layer And Track (44.704mm,56.134mm)(44.704mm,56.363mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2986.692mil|Location2.X=2997.942mil|Location1.Y=3499.375mil|Location2.Y=3510.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2986.692mil|Location2.X=2997.942mil|Location1.Y=3499.375mil|Location2.Y=3510.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.241mm &lt; 0.254mm) Between Pad R2-1(49.784mm,63.627mm) on Multi-Layer And Track (50.825mm,63.627mm)(51.054mm,63.627mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3222.058mil|Location2.X=3233.308mil|Location1.Y=3499.375mil|Location2.Y=3510.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3222.058mil|Location2.X=3233.308mil|Location1.Y=3499.375mil|Location2.Y=3510.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.241mm &lt; 0.254mm) Between Pad R2-2(57.404mm,63.627mm) on Multi-Layer And Track (56.134mm,63.627mm)(56.363mm,63.627mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3689.375mil|Location2.X=3700.625mil|Location1.Y=2671.692mil|Location2.Y=2682.942mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3689.375mil|Location2.X=3700.625mil|Location1.Y=2671.692mil|Location2.Y=2682.942mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.241mm &lt; 0.254mm) Between Pad R3-1(68.453mm,41.783mm) on Multi-Layer And Track (68.453mm,42.824mm)(68.453mm,43.053mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.241mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3689.375mil|Location2.X=3700.625mil|Location1.Y=2907.058mil|Location2.Y=2918.308mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3689.375mil|Location2.X=3700.625mil|Location1.Y=2907.058mil|Location2.Y=2918.308mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.241mm &lt; 0.254mm) Between Pad R3-2(68.453mm,49.403mm) on Multi-Layer And Track (68.453mm,48.133mm)(68.453mm,48.362mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.241mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID4DDDM4OQLQ5GMLI2KZLZV2TOGHP43BFJGYB1HYOSNHIFJPCM0NWO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2946.726mil|Location2.X=2957.976mil|Location1.Y=3939.289mil|Location2.Y=3950.539mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2946.726mil|Location2.X=2957.976mil|Location1.Y=3939.289mil|Location2.Y=3950.539mil|Absolute=True">Silk To Silk Clearance Constraint: (0.189mm &lt; 0.254mm) Between Text "+" (48.654mm,74.226mm) on Top Overlay And Track (49.784mm,73.533mm)(49.784mm,76.073mm) on Top Overlay Silk Text to Silk Clearance [0.189mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3316.013mil|Location2.X=3327.263mil|Location1.Y=3219.375mil|Location2.Y=3230.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3316.013mil|Location2.X=3327.263mil|Location1.Y=3219.375mil|Location2.Y=3230.625mil|Absolute=True">Silk To Silk Clearance Constraint: (0.137mm &lt; 0.254mm) Between Text "1" (59.563mm,56.515mm) on Top Overlay And Track (58.801mm,52.197mm)(58.801mm,57.277mm) on Top Overlay Silk Text to Silk Clearance [0.137mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3317.682mil|Location2.X=3328.932mil|Location1.Y=3119.375mil|Location2.Y=3130.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3317.682mil|Location2.X=3328.932mil|Location1.Y=3119.375mil|Location2.Y=3130.625mil|Absolute=True">Silk To Silk Clearance Constraint: (0.222mm &lt; 0.254mm) Between Text "2" (60.071mm,53.975mm) on Top Overlay And Track (58.801mm,52.197mm)(58.801mm,57.277mm) on Top Overlay Silk Text to Silk Clearance [0.222mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2904.407mil|Location2.X=2915.657mil|Location1.Y=3169.391mil|Location2.Y=3180.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2904.407mil|Location2.X=2915.657mil|Location1.Y=3169.391mil|Location2.Y=3180.641mil|Absolute=True">Silk To Silk Clearance Constraint: (0.052mm &lt; 0.254mm) Between Text "7" (48.387mm,56.515mm) on Top Overlay And Track (48.641mm,52.197mm)(48.641mm,57.277mm) on Top Overlay Silk Text to Silk Clearance [0.052mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2904.407mil|Location2.X=2915.657mil|Location1.Y=3077.722mil|Location2.Y=3088.972mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\altium projects\LED Flasher Circuit\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2904.407mil|Location2.X=2915.657mil|Location1.Y=3077.722mil|Location2.Y=3088.972mil|Absolute=True">Silk To Silk Clearance Constraint: (0.052mm &lt; 0.254mm) Between Text "8" (48.387mm,53.975mm) on Top Overlay And Track (48.641mm,52.197mm)(48.641mm,57.277mm) on Top Overlay Silk Text to Silk Clearance [0.052mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
